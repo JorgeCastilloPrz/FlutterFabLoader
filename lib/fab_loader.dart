@@ -7,6 +7,7 @@ import 'arc_painter.dart';
 
 class FabLoader extends StatefulWidget {
   final Color color;
+  final Color backgroundColor;
   final Widget child;
   final double strokeWidth;
   final bool mini;
@@ -14,6 +15,7 @@ class FabLoader extends StatefulWidget {
 
   FabLoader({
     this.strokeWidth = 4,
+    this.backgroundColor = Colors.transparent,
     this.color = Colors.orange,
     @required this.child,
     this.mini = false,
@@ -38,6 +40,8 @@ const BoxConstraints _miniSizeConstraints = BoxConstraints.tightFor(
   height: 40.0,
 );
 
+const ROTATE_ANIMATION_DURATION = 2000;
+
 class _FabLoadingWidget extends State<FabLoader>
     with SingleTickerProviderStateMixin {
   final Widget child;
@@ -56,9 +60,13 @@ class _FabLoadingWidget extends State<FabLoader>
   void initState() {
     super.initState();
     controller = new AnimationController(
-        vsync: this, duration: const Duration(milliseconds: 10000))
+        vsync: this,
+        duration: const Duration(milliseconds: ROTATE_ANIMATION_DURATION))
       ..repeat();
-    animation = Tween(begin: 0.0, end: 360.0).animate(controller);
+
+    var curve = new CurvedAnimation(parent: controller, curve: Curves.linear);
+    animation = Tween(begin: 0.0, end: 360.0).animate(curve);
+
     controller.addListener(() {
       setState(() {});
     });
@@ -74,6 +82,7 @@ class _FabLoadingWidget extends State<FabLoader>
           painter: new ArcPainter(
               strokeWidth: strokeWidth,
               progress: animation.value,
+              backgroundColor: widget.backgroundColor,
               color: widget.color),
           size: new Size(
               size.maxWidth + strokeWidth, size.maxHeight + strokeWidth),
