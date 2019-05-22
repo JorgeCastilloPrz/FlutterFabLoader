@@ -9,13 +9,23 @@ class FabLoadingWidget extends StatefulWidget {
   final Color color;
   final Widget child;
   final double strokeWidth;
+  final bool mini;
+  final BoxConstraints sizeConstraints;
 
-  FabLoadingWidget(
-      {this.strokeWidth = 8, this.color = Colors.orange, @required this.child});
+  FabLoadingWidget({
+    this.strokeWidth = 8,
+    this.color = Colors.orange,
+    @required this.child,
+    this.mini = false,
+  })  : assert(strokeWidth != null),
+        assert(color != null),
+        assert(child != null),
+        assert(mini != null),
+        sizeConstraints = mini ? _miniSizeConstraints : _sizeConstraints;
 
   @override
-  _FabLoadingWidget createState() =>
-      new _FabLoadingWidget(strokeWidth: strokeWidth, child: child);
+  _FabLoadingWidget createState() => new _FabLoadingWidget(
+      sizeConstraints: sizeConstraints, strokeWidth: strokeWidth, child: child);
 }
 
 const BoxConstraints _sizeConstraints = BoxConstraints.tightFor(
@@ -28,20 +38,19 @@ const BoxConstraints _miniSizeConstraints = BoxConstraints.tightFor(
   height: 40.0,
 );
 
-const BoxConstraints _extendedSizeConstraints = BoxConstraints(
-  minHeight: 48.0,
-  maxHeight: 48.0,
-);
-
 class _FabLoadingWidget extends State<FabLoadingWidget>
     with SingleTickerProviderStateMixin {
   final Widget child;
   final double strokeWidth;
+  final BoxConstraints sizeConstraints;
 
   AnimationController controller;
   Animation animation;
 
-  _FabLoadingWidget({@required this.strokeWidth, @required this.child});
+  _FabLoadingWidget(
+      {@required this.sizeConstraints,
+      @required this.strokeWidth,
+      @required this.child});
 
   @override
   void initState() {
@@ -57,7 +66,7 @@ class _FabLoadingWidget extends State<FabLoadingWidget>
 
   @override
   Widget build(BuildContext context) {
-    var size = _sizeConstraints;
+    var size = sizeConstraints;
     return new Stack(
       alignment: Alignment.center,
       children: <Widget>[
