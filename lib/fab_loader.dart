@@ -5,22 +5,28 @@ import 'package:flutter/rendering.dart';
 
 import 'arc_painter.dart';
 
+/// Draws a loading arc around the child view, supposed to be a
+/// FloatingActionButton.
 class FabLoader extends StatefulWidget {
   final Color color;
   final Color backgroundColor;
-  final Widget child;
   final double strokeWidth;
+  final double elevation;
   final bool mini;
   final BoxConstraints sizeConstraints;
+  final Widget child;
 
   FabLoader({
-    this.strokeWidth = 4,
-    this.backgroundColor = Colors.transparent,
     this.color = Colors.orange,
+    this.backgroundColor = Colors.transparent,
+    this.strokeWidth = 4,
+    this.elevation = 6,
     @required this.child,
     this.mini = false,
-  })  : assert(strokeWidth != null),
-        assert(color != null),
+  })  : assert(color != null),
+        assert(backgroundColor != null),
+        assert(strokeWidth != null),
+        assert(elevation != null),
         assert(child != null),
         assert(mini != null),
         sizeConstraints = mini ? _miniSizeConstraints : _defaultSizeConstraints;
@@ -78,6 +84,7 @@ class _FabLoadingWidget extends State<FabLoader>
     return new Stack(
       alignment: Alignment.center,
       children: <Widget>[
+        child,
         new CustomPaint(
           painter: new ArcPainter(
               strokeWidth: strokeWidth,
@@ -87,7 +94,6 @@ class _FabLoadingWidget extends State<FabLoader>
           size: new Size(
               size.maxWidth + strokeWidth, size.maxHeight + strokeWidth),
         ),
-        child
       ],
     );
   }
