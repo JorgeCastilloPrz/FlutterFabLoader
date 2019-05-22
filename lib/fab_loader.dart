@@ -21,14 +21,14 @@ class FabLoader extends StatefulWidget {
         assert(color != null),
         assert(child != null),
         assert(mini != null),
-        sizeConstraints = mini ? _miniSizeConstraints : _sizeConstraints;
+        sizeConstraints = mini ? _miniSizeConstraints : _defaultSizeConstraints;
 
   @override
   _FabLoadingWidget createState() => new _FabLoadingWidget(
       sizeConstraints: sizeConstraints, strokeWidth: strokeWidth, child: child);
 }
 
-const BoxConstraints _sizeConstraints = BoxConstraints.tightFor(
+const BoxConstraints _defaultSizeConstraints = BoxConstraints.tightFor(
   width: 56.0,
   height: 56.0,
 );
