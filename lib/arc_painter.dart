@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 
 class ArcPainter extends CustomPainter {
+  final double strokeWidth;
   final double progress;
   final Color backgroundColor;
   final Color color;
 
   ArcPainter(
-      {this.progress,
+      {this.strokeWidth,
+      this.progress,
       this.backgroundColor = Colors.grey,
       this.color = Colors.blue});
 
@@ -15,7 +17,7 @@ class ArcPainter extends CustomPainter {
     var paint = new Paint();
     paint
       ..color = backgroundColor
-      ..strokeWidth = size.width / 20
+      ..strokeWidth = strokeWidth
       ..style = PaintingStyle.stroke;
 
     canvas.drawCircle(

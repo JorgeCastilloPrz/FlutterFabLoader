@@ -5,15 +5,15 @@ import 'package:flutter/rendering.dart';
 
 import 'arc_painter.dart';
 
-class FabLoadingWidget extends StatefulWidget {
+class FabLoader extends StatefulWidget {
   final Color color;
   final Widget child;
   final double strokeWidth;
   final bool mini;
   final BoxConstraints sizeConstraints;
 
-  FabLoadingWidget({
-    this.strokeWidth = 8,
+  FabLoader({
+    this.strokeWidth = 4,
     this.color = Colors.orange,
     @required this.child,
     this.mini = false,
@@ -38,7 +38,7 @@ const BoxConstraints _miniSizeConstraints = BoxConstraints.tightFor(
   height: 40.0,
 );
 
-class _FabLoadingWidget extends State<FabLoadingWidget>
+class _FabLoadingWidget extends State<FabLoader>
     with SingleTickerProviderStateMixin {
   final Widget child;
   final double strokeWidth;
@@ -71,8 +71,10 @@ class _FabLoadingWidget extends State<FabLoadingWidget>
       alignment: Alignment.center,
       children: <Widget>[
         new CustomPaint(
-          painter:
-              new ArcPainter(progress: animation.value, color: widget.color),
+          painter: new ArcPainter(
+              strokeWidth: strokeWidth,
+              progress: animation.value,
+              color: widget.color),
           size: new Size(
               size.maxWidth + strokeWidth, size.maxHeight + strokeWidth),
         ),

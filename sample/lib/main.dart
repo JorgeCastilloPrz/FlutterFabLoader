@@ -16,9 +16,9 @@ class MyApp extends StatelessWidget {
             title: Text('FabLoader Flutter Demo'),
           ),
           body: Center(
-            child: Text('Empty state! ¯\\_(ツ)_/¯'),
+            child: Text('Empty state ¯\\_(ツ)_/¯'),
           ),
-          floatingActionButton: FabLoadingWidget(
+          floatingActionButton: FabLoader(
             child: FloatingActionButton(
               onPressed: _fabPressed,
               tooltip: 'Increment',
