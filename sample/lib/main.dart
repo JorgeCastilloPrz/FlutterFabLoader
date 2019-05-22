@@ -21,7 +21,6 @@ class MyApp extends StatelessWidget {
           floatingActionButton: FabLoader(
             child: FloatingActionButton(
               onPressed: _fabPressed,
-              tooltip: 'Increment',
               child: Icon(Icons.add),
             ),
           ),

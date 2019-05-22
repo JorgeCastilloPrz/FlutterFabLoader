@@ -54,7 +54,7 @@ class _FabLoadingWidget extends State<FabLoader>
 
   @override
   void initState() {
-    // TODO: implement initState
+    super.initState();
     controller = new AnimationController(
         vsync: this, duration: const Duration(milliseconds: 10000))
       ..repeat();
