@@ -100,7 +100,8 @@ class _FabLoadingWidget extends State<FabLoader>
     );
   }
 
-  Widget _buildAnimation() {
+  @override
+  Widget build(BuildContext context) {
     return AnimatedBuilder(
       animation: _controller,
       builder: (BuildContext context, Widget child) {
@@ -113,10 +114,5 @@ class _FabLoadingWidget extends State<FabLoader>
         );
       },
     );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return _buildAnimation();
   }
 }

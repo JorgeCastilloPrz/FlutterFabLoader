@@ -36,10 +36,6 @@ class ArcPainter extends CustomPainter {
 
   @override
   void paint(Canvas canvas, Size size) {
-    final Paint paint = Paint()
-      ..color = valueColor
-      ..strokeWidth = strokeWidth
-      ..style = PaintingStyle.stroke;
     if (backgroundColor != null) {
       final Paint backgroundPaint = Paint()
         ..color = backgroundColor
@@ -54,7 +50,11 @@ class ArcPainter extends CustomPainter {
           backgroundPaint);
     }
 
-    paint.strokeCap = StrokeCap.square;
+    final Paint paint = Paint()
+      ..color = valueColor
+      ..strokeWidth = strokeWidth
+      ..style = PaintingStyle.stroke
+      ..strokeCap = StrokeCap.square;
 
     canvas.drawArc(
         Offset(-strokeWidth / 2, -strokeWidth / 2) &
