@@ -11,19 +11,16 @@ class FabLoader extends StatefulWidget {
   final Color color;
   final Color backgroundColor;
   final double strokeWidth;
-  final double elevation;
   final Widget child;
 
   FabLoader({
     this.color = Colors.orange,
     this.backgroundColor = Colors.transparent,
     this.strokeWidth = 4,
-    this.elevation = 6,
     @required this.child,
   })  : assert(color != null),
         assert(backgroundColor != null),
         assert(strokeWidth != null),
-        assert(elevation != null),
         assert(child != null);
 
   @override
@@ -85,8 +82,8 @@ class _FabLoadingWidget extends State<FabLoader>
     super.dispose();
   }
 
-  Widget _buildIndicator(BuildContext context, double headValue,
-      double tailValue, int stepValue, double rotationValue) {
+  Widget _buildIndicator(
+      double headValue, double tailValue, int stepValue, double rotationValue) {
     return new CustomPaint(
       child: child,
       foregroundPainter: new ArcPainter(
@@ -106,7 +103,6 @@ class _FabLoadingWidget extends State<FabLoader>
       animation: _controller,
       builder: (BuildContext context, Widget child) {
         return _buildIndicator(
-          context,
           _kStrokeHeadTween.evaluate(_controller),
           _kStrokeTailTween.evaluate(_controller),
           _kStepTween.evaluate(_controller),
