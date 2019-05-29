@@ -28,14 +28,16 @@ class FabLoader extends StatefulWidget {
       new _FabLoadingWidget(strokeWidth: strokeWidth, child: child);
 }
 
-// Arc head will be lead by this Tween curve.
+// Arc head will be lead by this Tween curve. This is for the first half of the
+// animation, while the arc is growing from its head.
 final Animatable<double> _kStrokeHeadTween = CurveTween(
   curve: const Interval(0.0, 0.5, curve: Curves.fastOutSlowIn),
 ).chain(CurveTween(
   curve: const SawTooth(5),
 ));
 
-// Arc tail will be lead by this Tween curve.
+// Arc tail will be lead by this Tween curve. This is for the second half of the
+// animation, when the arc is shrinking from its tail.
 final Animatable<double> _kStrokeTailTween = CurveTween(
   curve: const Interval(0.5, 1.0, curve: Curves.fastOutSlowIn),
 ).chain(CurveTween(
@@ -89,7 +91,7 @@ class _FabLoadingWidget extends State<FabLoader>
       foregroundPainter: new ArcPainter(
           strokeWidth: strokeWidth,
           backgroundColor: widget.backgroundColor,
-          valueColor: widget.color,
+          color: widget.color,
           headValue: headValue,
           tailValue: tailValue,
           stepValue: stepValue,

@@ -3,14 +3,14 @@ import 'dart:math';
 
 class ArcPainter extends CustomPainter {
   ArcPainter({
+    this.strokeWidth,
     this.backgroundColor,
-    this.valueColor,
+    this.color,
     this.headValue,
     this.tailValue,
     this.stepValue,
-    this.rotationValue,
-    this.strokeWidth,
-  })  : arcStart = _startAngle +
+    this.rotationValue
+  })  : arcStart = _startAngle + // -pi / 2
             tailValue * 3 / 2 * pi +
             rotationValue * pi * 1.7 -
             stepValue * 0.8 * pi,
@@ -18,7 +18,7 @@ class ArcPainter extends CustomPainter {
             max(headValue * 3 / 2 * pi - tailValue * 3 / 2 * pi, _epsilon);
 
   final Color backgroundColor;
-  final Color valueColor;
+  final Color color;
   final double headValue;
   final double tailValue;
   final int stepValue;
@@ -31,7 +31,7 @@ class ArcPainter extends CustomPainter {
   static const double _epsilon = .001;
 
   // Canvas.drawArc(r, 0, 2*PI) doesn't draw anything, so just get close.
-  static const double _sweep = _twoPi - _epsilon;
+  static const double _completeCircumference = _twoPi - _epsilon;
   static const double _startAngle = -pi / 2.0;
 
   @override
@@ -45,13 +45,13 @@ class ArcPainter extends CustomPainter {
           Offset(-strokeWidth / 2, -strokeWidth / 2) &
               Size(size.width + strokeWidth, size.height + strokeWidth),
           0,
-          _sweep,
+          _completeCircumference,
           false,
           backgroundPaint);
     }
 
     final Paint paint = Paint()
-      ..color = valueColor
+      ..color = color
       ..strokeWidth = strokeWidth
       ..style = PaintingStyle.stroke
       ..strokeCap = StrokeCap.square;
@@ -68,7 +68,7 @@ class ArcPainter extends CustomPainter {
   @override
   bool shouldRepaint(ArcPainter oldPainter) {
     return oldPainter.backgroundColor != backgroundColor ||
-        oldPainter.valueColor != valueColor ||
+        oldPainter.color != color ||
         oldPainter.headValue != headValue ||
         oldPainter.tailValue != tailValue ||
         oldPainter.stepValue != stepValue ||
