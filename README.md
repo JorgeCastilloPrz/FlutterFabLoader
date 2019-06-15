@@ -1,6 +1,6 @@
 # flutter_fab_loader
 
-Flutter library package that provides a loader to wrap a Material Design `FloatingActionButton`.
+Flutter sample library to provide a loader to wrap a Material Design `FloatingActionButton`. Used as a sample project [for this post](https://jorgecastillo.dev/flutter-canvas-i-wrap-fab-in-custom-progress-loader).
 
 ## Getting Started
 
